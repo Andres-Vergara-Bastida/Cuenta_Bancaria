@@ -29,7 +29,14 @@ class Cliente(Persona):
 def crear_cliente():
     nombre_cl = input("ingrese su nombre: ")
     apellido_cl = input("Ingrese su apellido: ")
-    numero_cuenta = input("Ingrese su numero de cuenta: ")
+    while True:
+        numero_cuenta = int(input("Ingrese su numero de cuenta de 8 digitos: "))
+        if numero_cuenta == numero_cuenta in range(9999999,99999999):
+            print("-- numero de cuenta correcto --")
+            break
+        else:
+            print("-- numero de cuenta incorrecto recuerda que el numero siempre empieza por '1' que es el codigo de nuestro banco --")
+                
     cliente = Cliente(nombre_cl,apellido_cl, numero_cuenta)
     return cliente
 
