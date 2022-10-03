@@ -1,3 +1,6 @@
+
+
+
 class Persona:
 
     def __init__(self, nombre, apellido):
@@ -13,7 +16,7 @@ class Cliente(Persona):
 
 
     def __str__(self):
-        return f"Cliente; {self.nombre} {self.apellido}\nBalance de cuenta {self.numero_cuenta}: €{self.balance}"
+        return f"Cliente; {self.nombre} {self.apellido}\nBalance de la cuenta {self.numero_cuenta}: €{self.balance}"
 
     def depositar(self,deposito):
         self.balance += deposito
@@ -27,15 +30,41 @@ class Cliente(Persona):
             print("Fondos insuficientes")
 
 def crear_cliente():
-    nombre_cl = input("ingrese su nombre: ")
-    apellido_cl = input("Ingrese su apellido: ")
     while True:
-        numero_cuenta = int(input("Ingrese su numero de cuenta de 8 digitos: "))
-        if numero_cuenta == numero_cuenta in range(9999999,99999999):
-            print("-- numero de cuenta correcto --")
+        
+        nombre_cl = input("Ingrese su nombre: ") 
+        print("\n")       
+        apellido_cl = input("Ingrese su apellido: ")
+        print("\n") 
+        if nombre_cl.isalpha() == True and apellido_cl.isalpha() == True:
+            print(f"Hola {nombre_cl} {apellido_cl}, un placer verte de nuevo")
+            print("\n") 
             break
+
         else:
-            print("-- numero de cuenta incorrecto recuerda que el numero siempre empieza por '1' que es el codigo de nuestro banco --")
+            print("-- Nombre o Apellido incorrectos --")
+            print("\n") 
+        
+    
+
+    while True:
+        
+        numero_cuenta = input("Ingrese su numero de cuenta de 8 digitos: ")
+        print("\n") 
+        if numero_cuenta.isnumeric() == True:           
+            print("\n") 
+            
+            if int(numero_cuenta) == int(numero_cuenta) in range(9999999,99999999):
+                print(f'Tu numero de cuenta es {numero_cuenta}')
+                break
+            else:
+                print("-- Numero de cuenta incorrecto !!\n recuerda que el numero no puede empezar por '0'\n y debe contener '8' digitos --")
+                print("\n") 
+               
+        else:   
+            print("-- Recuerda que solo puedes poner digitos --") 
+            print("\n")       
+            
                 
     cliente = Cliente(nombre_cl,apellido_cl, numero_cuenta)
     return cliente
@@ -52,19 +81,35 @@ def inicio():
 
     opcion = 0
 
-    while opcion != "S":
-        print("Elige una opcion: Depositas (D), Retirar (R), o Salir (S)")
+    while True:
+        while opcion != "S":
+            print("Elige una opcion: Depositas (D), Retirar (R), o Salir (S)")
+            print("\n") 
 
-        opcion = input()
+            opcion = input()
 
-        if opcion == "D":
-            cantidad_dep = int(input("Cantidad a depositar: "))
-            mi_cliente.depositar(cantidad_dep)
-        elif opcion == "R":
-            cantidad_ret = int(input("Cantidad a retirar: "))
-            mi_cliente.retirada(cantidad_ret)
-        print(mi_cliente)
+            if opcion == "D" or opcion == "d":
+                cantidad_dep = (input("Cantidad a depositar: "))
+                print("\n") 
+                if cantidad_dep.isnumeric() == True:
+                    mi_cliente.depositar(int(cantidad_dep))
+                else:
+                    print("-- Recuerda que solo puedes depositar dinero --")
+                    print("\n") 
+                
+            elif opcion == "R" or opcion == "r":
+                cantidad_ret = (input("Cantidad a retirar: "))
+                print("\n") 
+                if cantidad_ret.isnumeric() == True:
+                    mi_cliente.retirada(int(cantidad_ret))
+                else:
+                    print("-- Recuerda que solo puedes retirar dinero --")
+                    print("\n") 
+                
+            print(mi_cliente)
 
-    print("Gracias por operar en Banco Python")
+        print("\n") 
+        print("Gracias por operar en Banco Python")
+        break
 
 inicio()
